@@ -21,12 +21,14 @@ Install the package with [pip][] and [Mercurial][] or [git][]:
 [Mercurial]: http://hg-scm.org/
 [git]: http://git-scm.com/
 
-Symlink the necessary media and templates:
-
-    ln -s [/full/path/to]/django-ckeditor/ckeditor/media/ckeditor media/ckeditor
-    ln -s [/full/path/to]/django-ckeditor/ckeditor/templates/ckeditor templates/ckeditor
-
 Add `ckeditor` to your `INSTALLED_APPS`.
+
+If you are not using the [staticfiles app]
+(http://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/), see the "Static Media Setup" section
+(at the end of this document). 
+`staticfiles` is shipped as a contrib app in Django >= 1.3 and is also
+available as [django-staticfiles]
+(http://pypi.python.org/pypi/django-staticfiles/) for earlier versions.
 
 Add a `CKEDITOR_CONFIGS` variable to your `settings.py` with at least a
 `default` config:
@@ -139,12 +141,25 @@ When setting up the `CKEditor` widget in your `Form` class you can pass a
 You cannot use the `HTMLField` shortcut if you want to specify a custom config
 -- you *must* create a form.
 
-### Media URL
+### Static Media Setup
 
-You can also customize the URL that django-ckeditor will look for the CKEditor
+By default django-ckeditor will use [Django's staticfiles app]
+(http://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/) to serve
+its static media. If you aren't using `django.contrib.staticfiles`(or
+django-staticfiles on pre-1.3 versions of Django), an additional
+setup step is needed so that django-ckeditor find its static files.
+Symlink the necessary media and templates:
+
+    ln -s [/full/path/to]/django-ckeditor/ckeditor/static/ckeditor media/ckeditor
+    ln -s [/full/path/to]/django-ckeditor/ckeditor/templates/ckeditor templates/ckeditor
+
+### Custom Static Media URL
+
+Even if you are not using `django.contrib.staticfiles`, you can still
+customize the URL that django-ckeditor will look for the CKEditor
 media at by adding `CKEDITOR_MEDIA_URL` to your `settings.py` file like this:
 
     CKEDITOR_MEDIA_URL = '/static/third-party/ckeditor'
 
-The default value is `MEDIA_URL/ckeditor` which is why the setup instructions
-tell you to symlink it into your `media/` directory.
+The default value is `MEDIA_URL/ckeditor` which is why the static media setup
+instructions tell you to symlink it into your `media/` directory.
