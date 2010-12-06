@@ -124,7 +124,9 @@ like this:
     }
 
 When setting up the `CKEditor` widget in your `Form` class you can pass a
-`ckeditor_config` keyword argument to specify the config to use:
+`ckeditor_config` keyword argument to specify the config to use. Either
+pass the name of a config defined in your settings, or pass a complete
+configuration dictionary :
 
     class BlogPostForm(forms.Form):
         title = forms.CharField()
@@ -137,6 +139,12 @@ When setting up the `CKEditor` widget in your `Form` class you can pass a
         # This field will render as a CKEditor with the 'default' config.
         body = forms.CharField(
             widget=CKEditor()
+        )
+        
+        # This field will render as a CKEditor with the CKEditor's builtin
+        # 'Basic' toolbar.
+        subtitle = forms.CharField(
+            widget=CKEditor(ckeditor_config={'toolbar':'Basic'})
         )
     
 

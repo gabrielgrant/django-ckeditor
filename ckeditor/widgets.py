@@ -41,9 +41,13 @@ class CKEditor(forms.Textarea):
 
     def render(self, name, value, attrs=None, **kwargs):
         rendered = super(CKEditor, self).render(name, value, attrs)
+        if hasattr(self.ckeditor_config, 'items'):
+            config = json.dumps(self.ckeditor_config)
+        else:
+            config = CKEDITOR_CONFIGS[self.ckeditor_config]
         context = {
             'name': name,
-            'config': CKEDITOR_CONFIGS[self.ckeditor_config],
+            'config': config,
             'filebrowser': FILEBROWSER_PRESENT,
         }
         return rendered +  mark_safe(render_to_string(
