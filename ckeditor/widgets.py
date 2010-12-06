@@ -11,8 +11,13 @@ from django.contrib.admin import widgets as admin_widgets
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
+if hasattr(settings, 'CKEDITOR_CONFIGS'):
+    CKEDITOR_CONFIGS = dict((k, json.dumps(v)) for k, v in settings.CKEDITOR_CONFIGS.items())
+else:
+    CKEDITOR_CONFIGS = {}
+if 'default' not in CKEDITOR_CONFIGS:
+    CKEDITOR_CONFIGS['default'] = '{}'
 
-CKEDITOR_CONFIGS = dict((k, json.dumps(v)) for k, v in settings.CKEDITOR_CONFIGS.items())
 FILEBROWSER_PRESENT = 'filebrowser' in getattr(settings, 'INSTALLED_APPS', [])
 GRAPPELLI_PRESENT = 'grappelli' in getattr(settings, 'INSTALLED_APPS', [])
 if hasattr(settings, 'STATIC_URL'):

@@ -30,8 +30,10 @@ If you are not using the [staticfiles app]
 available as [django-staticfiles]
 (http://pypi.python.org/pypi/django-staticfiles/) for earlier versions.
 
-Add a `CKEDITOR_CONFIGS` variable to your `settings.py` with at least a
-`default` config:
+If you would like to use [configuration settings]
+(http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html) other
+than CKEditor's defaults, add a `CKEDITOR_CONFIGS` variable to your
+`settings.py` with at least a `default` config:
 
     CKEDITOR_CONFIGS = {
         'default': {
