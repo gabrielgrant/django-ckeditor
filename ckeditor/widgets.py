@@ -39,15 +39,24 @@ class CKEditor(forms.Textarea):
 
         super(CKEditor, self).__init__(*args, **kwargs)
 
-    def render(self, name, value, attrs=None, **kwargs):
-        rendered = super(CKEditor, self).render(name, value, attrs)
+    def get_ckeditor_config_dict(self):
+        if hasattr(self.ckeditor_config, 'items'):
+            return self.ckeditor_config
+        else:
+            return settings.CKEDITOR_CONFIGS.get(self.ckeditor_config, {})
+
+    def get_ckeditor_config(self):
         if hasattr(self.ckeditor_config, 'items'):
             config = json.dumps(self.ckeditor_config)
         else:
             config = CKEDITOR_CONFIGS[self.ckeditor_config]
+        return config
+
+    def render(self, name, value, attrs=None, **kwargs):
+        rendered = super(CKEditor, self).render(name, value, attrs)
         context = {
             'name': name,
-            'config': config,
+            'config': self.get_ckeditor_config(),
             'filebrowser': FILEBROWSER_PRESENT,
         }
         return rendered +  mark_safe(render_to_string(
