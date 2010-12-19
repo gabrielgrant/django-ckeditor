@@ -23,17 +23,19 @@ Install the package with [pip][] and [Mercurial][] or [git][]:
 
 Add `ckeditor` to your `INSTALLED_APPS`.
 
-If you are not using the [staticfiles app]
-(http://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/), see the "Static Media Setup" section
-(at the end of this document). 
-`staticfiles` is shipped as a contrib app in Django >= 1.3 and is also
-available as [django-staticfiles]
-(http://pypi.python.org/pypi/django-staticfiles/) for earlier versions.
+If you are not using the [staticfiles app][], see the "Static Media Setup"
+section (at the end of this document). `staticfiles` is shipped as a contrib
+app in Django >= 1.3 and is also available as [django-staticfiles][] for
+earlier versions.
 
-If you would like to use [configuration settings]
-(http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html) other
+[staticfiles app]: http://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
+[django-staticfiles]: http://pypi.python.org/pypi/django-staticfiles/
+
+If you would like to use [configuration settings][] other
 than CKEditor's defaults, add a `CKEDITOR_CONFIGS` variable to your
 `settings.py` with at least a `default` config:
+
+[configuration settings]: http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html
 
     CKEDITOR_CONFIGS = {
         'default': {
