@@ -45,8 +45,10 @@ class CKEditor(forms.Textarea):
     def get_ckeditor_config_dict(self):
         if hasattr(self.ckeditor_config, 'items'):
             return self.ckeditor_config
-        else:
+        elif hasattr(settings, 'CKEDITOR_CONFIGS'):
             return settings.CKEDITOR_CONFIGS.get(self.ckeditor_config, {})
+        else:
+            return {}
 
     def get_ckeditor_config(self):
         if hasattr(self.ckeditor_config, 'items'):
