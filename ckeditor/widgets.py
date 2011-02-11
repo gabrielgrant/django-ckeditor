@@ -60,7 +60,9 @@ class CKEditor(forms.Textarea):
     def render(self, name, value, attrs=None, **kwargs):
         final_attrs = self.build_attrs(attrs)
         if 'ckeditor_config' in final_attrs:
-            self.ckeditor_config = final_attrs.pop('ckeditor_config')
+            config = self.get_ckeditor_config_dict()
+            config.update(final_attrs.pop('ckeditor_config'))
+            self.ckeditor_config = config
         rendered = super(CKEditor, self).render(name, value, attrs)
         context = {
             'name': name,
